@@ -4,6 +4,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 const { randomUUID } = require('crypto');
 const config = require('./project.config');
+const { createIntakeApp } = require('./acceptance');
 
 const app = express();
 const PORT = process.env.PORT || config.port;
@@ -186,7 +187,14 @@ function applyQuery(records, query) {
   });
 }
 
-initDb();
+try {
+  initDb();
+} catch (error) {
+  console.warn('通用档案库初始化失败（不影响眼睑气密验收台）：', error.message);
+}
+
+// 眼睑气密验收台：入口、判定、档案三个业务模块装配在 /api/eyelidAcceptance 下
+app.use(createIntakeApp());
 
 app.get('/health', (req, res) => {
   res.json({ ok: true, service: config.title, port: PORT });

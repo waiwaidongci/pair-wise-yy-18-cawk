@@ -1,5 +1,6 @@
 node_modules/
 data/app.db
+data/eyelid-acceptance.json
 .DS_Store
 
 # Logs
