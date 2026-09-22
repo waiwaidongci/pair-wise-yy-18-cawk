@@ -4,7 +4,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "acceptance": "node acceptance/server.js",
+    "test": "node --test acceptance/test/"
   },
   "dependencies": {
     "express": "^4.19.2"
